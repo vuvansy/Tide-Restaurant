@@ -40,3 +40,13 @@ export const handleErrorApi = ({
         });
     }
 };
+
+const isBrowser = typeof window !== "undefined";
+
+//Lấy ra accessToken trên LocalStorage
+export const getAccessTokenFromLocalStorage = () =>
+    isBrowser ? localStorage.getItem("accessToken") : null;
+
+//Lấy ra refreshToken trên LocalStorage
+export const getRefreshTokenToLocalStorage = () =>
+    isBrowser ? localStorage.getItem("refreshToken") : null;
