@@ -27,6 +27,7 @@ export function middleware(request: NextRequest) {
     !accessToken &&
     refreshToken
   ) {
+    console.log('Nhảy vào đây rồi')
     const url = new URL('/logout', request.url)
     url.searchParams.set('refreshToken', refreshToken)
     return NextResponse.redirect(url)
