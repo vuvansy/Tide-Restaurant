@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
   if (privatePaths.some((path) => pathname.startsWith(path)) && !refreshToken) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
-  
+
   // Đăng nhập rồi thì sẽ không cho vào login nữa
   if (unAuthPaths.some((path) => pathname.startsWith(path)) && refreshToken) {
     return NextResponse.redirect(new URL('/', request.url))
@@ -27,9 +27,10 @@ export function middleware(request: NextRequest) {
     !accessToken &&
     refreshToken
   ) {
-    console.log('Nhảy vào đây rồi')
-    const url = new URL('/logout', request.url)
+
+    const url = new URL('/refresh-token', request.url)
     url.searchParams.set('refreshToken', refreshToken)
+    url.searchParams.set('redirect', pathname)
     return NextResponse.redirect(url)
   }
 
